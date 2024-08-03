@@ -1,0 +1,36 @@
+---
+
+- hosts: debian_based
+  become: true
+  tasks:
+    - name: Update apt repo chache dan Instal apache2.
+      apt:
+        update_cache: yes
+        name: apache2
+        state: present
+
+- hosts: redhat_based
+  become: true
+  tasks:
+    - name: Update dnf repo chache dan Instal httpd.
+      dnf:
+        update_cache: yes
+        name: httpd
+        state: present
+
+    - name: Enable dan start httpd.
+      systemd:
+        name: httpd
+        enabled: yes
+        state: started
+
+- hosts: all
+  become: true
+  tasks:
+    - name: mencopy default site ke server dan fix permission ownership
+      copy:
+        src: default_file.html
+        dest: /var/www/html/index.html
+        owner: root
+        group: root
+        mode: 0644

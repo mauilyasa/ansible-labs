@@ -1,0 +1,32 @@
+---
+
+- hosts: debian-based
+  become: true
+  tasks:
+    - name: Update repository. (sudo apt update)
+      apt:
+        update_cache: yes
+
+    - name : Install apache2 (sudo apt install apache2)
+      apt:
+        name: apache2
+        state: present
+
+- hosts: redhat-based
+  become: true
+  tasks:
+    - name: Update repository dnf.
+      dnf:
+        update_cache: yes
+
+    - name: Install httpd (sudo dnf intall httpd)
+      dnf:
+        name: httpd
+        state: present
+
+    - name: Enable dan start httpd.
+      systemd:
+        name: httpd
+        enabled: yes
+        state: started
+

@@ -1,0 +1,6 @@
+[debian_based]
+pod0 ansible_host=pod0-ubuntu.yaslab.my.id
+pod1 ansible_host=pod1-debian.yaslab.my.id
+
+[redhat_based]
+pod2 ansible_host=pod2-fedora.yaslab.my.id

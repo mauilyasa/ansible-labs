@@ -1,0 +1,26 @@
+- hosts: all
+  become: yes
+  tasks:
+    - name: Menganti H1 pada Debian Webserver
+      lineinfile:
+        path: /var/www/html/index.html
+        regexp: '<h1>.*</h1>'
+        line: '<h1>This is Debian Webserver</h1>'
+        backrefs: yes
+      when: ansible_distribution == "Debian"
+
+    - name: Menganti H1 pada Fedora Webserver
+      lineinfile:
+        path: /var/www/html/index.html
+        regexp: '<h1>.*</h1>'
+        line: '<h1>This is Fedora Webserver</h1>'
+        backrefs: yes
+      when: ansible_distribution == "Fedora"
+
+    - name: Menganti H1 pada Ubuntu Webserver
+      lineinfile:
+        path: /var/www/html/index.html
+        regexp: '<h1>.*</h1>'
+        line: '<h1>This is Ubuntu Webserver</h1>'
+        backrefs: yes
+      when: ansible_distribution == "Ubuntu"
